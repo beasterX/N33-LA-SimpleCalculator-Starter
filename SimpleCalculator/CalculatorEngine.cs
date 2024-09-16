@@ -24,11 +24,12 @@ namespace SimpleCalculator
             {
                 if (argSecondNumber == 0)
                 {
-                    Console.WriteLine("cannot divide by zero. Try again.");
+                    Console.WriteLine("cannot divide by zero. Try again please.");
                 }
                 else
                 {
                     result = argFirstNumber / argSecondNumber;
+                   
                 }
             }
 
