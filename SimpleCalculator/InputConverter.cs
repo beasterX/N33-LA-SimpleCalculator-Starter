@@ -1,20 +1,20 @@
-﻿using System;
+﻿    using System;
 
-namespace SimpleCalculator
-{
-    public static class InputConverter
+    namespace SimpleCalculator
     {
-        public static double ConvertInputToNumeric(string argTextInput)
+        public static class InputConverter
         {
-           try
+            public static double ConvertInputToNumeric(string argTextInput)
             {
-                return Convert.ToDouble(argTextInput);
+                if (double.TryParse(argTextInput, out double convertedNumber))
+                {
+                    return convertedNumber;
+                }
+                else
+                {
+                    throw new ArgumentException("Not a numeric value.");
+                }
+
             }
-            catch (FormatException)
-            {
-                throw new ArgumentException("Must be a numeric value.");
-            }
-          
         }
     }
-}
