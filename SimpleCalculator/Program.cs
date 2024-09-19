@@ -1,7 +1,8 @@
 ﻿using System;
 
+
 namespace SimpleCalculator
-{
+{  
     class Program
     {
         static void Main(string[] args)
@@ -10,72 +11,82 @@ namespace SimpleCalculator
             {
                 CalculatorEngine calculatorEngine = new CalculatorEngine();
 
-                string operation = GetValidOperation("Enter an operation: ");
                 double firstNumber = GetValidNumber("Enter the first number: ");
                 double secondNumber = GetValidNumber("Enter the second number: ");
+                string operation = GetValidOperation();
+                if (operation == "divide")
+                {
+                    while (secondNumber == 0)
+                    {
+                        Console.WriteLine("Change numerical value to something other than 0");
+                        secondNumber = GetValidNumber("Enter the second number: ");
+                    }
+                }
 
                 double result = calculatorEngine.Calculate(operation, firstNumber, secondNumber);
-                Console.WriteLine($"{firstNumber} {GetOperationSymbol(operation)} {secondNumber} is equal to {result:F2}");
-            }
-            catch (Exception ex)
+                string formattedString= string.Format("{0} {1} {2} is equal to {3:F2}", firstNumber, operation ,secondNumber, result);
+                Console.WriteLine(formattedString);
+                Console.ReadKey();
+            } catch (Exception ex)
             {
+       
                 Console.WriteLine(ex.Message);
             }
         }
 
-        static double GetValidNumber(string n)
+        public static double GetValidNumber(string numberMessage)
         {
             double number;
-            Console.WriteLine(n);
-            string input = Console.ReadLine();
-
             while (true)
             {
+                Console.Write(numberMessage);
+                string input = Console.ReadLine();
                 try
                 {
                     number = InputConverter.ConvertInputToNumeric(input);
                     break;
                 }
-                catch (ArgumentException ex)
+                catch (ArgumentException)
                 {
-                    Console.WriteLine(ex.Message);
-                    input = Console.ReadLine();
+                    Console.WriteLine("enter a valid numeric value.");
+                    
                 }
             }
-
             return number;
         }
-
-        static string GetOperationSymbol(string operation)
+        public static string GetValidOperation()
         {
-            switch (operation.ToLower())
+            while (true)
             {
-                case "add":
-                    return "+";
-                case "subtract":
-                    return "-";
-                case "multiply":
-                    return "*";
-                case "divide":
-                    return "/";
-                default:
-                    return operation;
+                Console.Write("Enter the operation (+, -, *, /, add, subtract, multiply, divide): ");
+                string operation = Console.ReadLine();
+
+                switch (operation)
+                {
+                    case "+":
+                    case "add":
+                        return "add";
+                        break;
+                    case "-":
+                    case "subtract":
+                        return "subtract";
+                        break;
+                    case "*":
+                    case "multiply":
+                        return "multiply";
+                        break;
+                    case "/":
+                    case "divide":
+                        return "divide";
+                        break;
+                    case "^":
+                   
+                    default:
+                        Console.WriteLine("enter a valid operation");
+                        break;
+                }
             }
         }
-            static string GetValidOperation(string o)
-        {
-            Console.WriteLine(o);
-            string operation = Console.ReadLine();
-
-            while (!(operation == "+" || operation == "-" || operation == "*" || operation == "/" || operation == "add" || operation == "subtract" || operation == "multiply" || operation == "divide"))
-            {
-                Console.WriteLine("Invalid operation!  Enter +, -, *, or /.");
-                operation = Console.ReadLine();
-            }
-
-            return operation;
-        }
-
-        
     }
 }
+

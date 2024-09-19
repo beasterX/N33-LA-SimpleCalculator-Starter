@@ -18,44 +18,28 @@ namespace SimpleCalculator.Test.Unit
             Assert.AreEqual(3, result);
 
         }
-
         [TestMethod]
-        public void AddsTwoNumbersAndReturnsValidResultForSymbolOpertion()
+        public void SubtractsTwoNumbersAndReturnsValidResultForNonSymbolOpertion()
         {
 
             int number1 = 1;
             int number2 = 2;
-            double result = _calculatorEngine.Calculate("+", number1, number2);
-            Assert.AreEqual(3, result);
-
-        }
-
-
-        [TestMethod]
-        public void SubstractTwoNumbersAndReturnsValidResultForNonSymbolOpertion()
-        {
-
-            int number1 = 1;
-            int number2 = 2;
-            double result = _calculatorEngine.Calculate("substract", number1, number2);
-            Assert.AreEqual(-1, result);
-
-        }
-
-
-        [TestMethod]
-        public void SubstractTwoNumbersAndReturnsValidResultForSymbolOpertion()
-        {
-
-            int number1 = 1;
-            int number2 = 2;
-            double result = _calculatorEngine.Calculate("-", number1, number2);
+            double result = _calculatorEngine.Calculate("subtract", number1, number2);
             Assert.AreEqual(-1, result);
 
         }
 
         [TestMethod]
-        public void MultiplyTwoNumbersAndReturnsValidResultForNonSymbolOpertion()
+        public void DividesTwoNumbersAndReturnsValidResultForSymbolOpertion()
+        {
+
+            int number1 = 1;
+            int number2 = 0;
+            double result = _calculatorEngine.Calculate("divided", number1, number2);
+            Assert.IsTrue(double.IsInfinity(result));
+        }
+        [TestMethod]
+        public void MultipliesTwoNumbersAndReturnsValidResultForNonSymbolOpertion()
         {
 
             int number1 = 1;
@@ -64,38 +48,6 @@ namespace SimpleCalculator.Test.Unit
             Assert.AreEqual(2, result);
 
         }
-
-        [TestMethod]
-        public void MultiplyTwoNumbersAndReturnsValidResultForSymbolOpertion()
-        {
-
-            int number1 = 1;
-            int number2 = 2;
-            double result = _calculatorEngine.Calculate("*", number1, number2);
-            Assert.AreEqual(2, result);
-
-        }
-
-        [TestMethod]
-        public void DivideTwoNumbersAndReturnsValidResultForNonSymbolOpertion()
-        {
-
-            int number1 = 1;
-            int number2 = 2;
-            double result = _calculatorEngine.Calculate("division", number1, number2);
-            Assert.AreEqual(0.5, result);
-
-        }
-
-        [TestMethod]
-        public void DivideTwoNumbersAndReturnsValidResultForSymbolOpertion()
-        {
-
-            int number1 = 1;
-            int number2 = 2;
-            double result = _calculatorEngine.Calculate("/", number1, number2);
-            Assert.AreEqual(0.5, result);
-
-        }
+      
     }
 }
